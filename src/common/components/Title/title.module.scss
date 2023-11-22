@@ -1,0 +1,116 @@
+.content {
+    width: 854px;
+    height: 480px;
+    position: relative;
+    overflow: hidden;
+    z-index: 10;
+    transition:
+        opacity 0.5s ease,
+        visibility 0.5s ease;
+}
+.video {
+    width: 854px;
+    height: 480px;
+    z-index: 1;
+}
+.title_blog_work247 {
+    position: absolute;
+    z-index: 6;
+    right: 84px;
+    top: 0;
+    bottom: 0;
+    height: 100%;
+    background: transparent;
+    width: 300px;
+    opacity: 0;
+    transform: translateY(-50px);
+    animation: fadeInDown 1s ease forwards;
+    display: flex;
+    align-items: center;
+    .p {
+        font-size: 28px;
+        text-align: center;
+        color: #fff;
+        background: transparent;
+        line-height: 1.6;
+    }
+}
+.title_uv_work247 {
+    position: absolute;
+    z-index: 6;
+    left: 84px;
+    top: 0;
+    bottom: 0;
+    height: 100%;
+    background: transparent;
+    opacity: 0;
+    width: 320px;
+    transform: translateY(-50px);
+    animation: fadeInDown 1s ease forwards;
+    display: flex;
+    align-items: center;
+    .p {
+        font-size: 40px;
+        color: #4c5bd4;
+        background: transparent;
+        line-height: 1.6;
+        text-transform: capitalize;
+    }
+}
+.title_blog_timviec {
+    position: absolute;
+    z-index: 6;
+    right: 0;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    height: 100%;
+    background: transparent;
+    width: 100%;
+    opacity: 0;
+    transform: translateY(-50px);
+    animation: fadeInDown 1s ease forwards;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .p {
+        font-size: 40px;
+        color: #fff;
+        max-width: 400px;
+        text-align: center;
+        background: transparent;
+        line-height: 1.6;
+    }
+}
+.title_uv_timviec {
+    position: absolute;
+    z-index: 6;
+    left: 84px;
+    top: 0;
+    bottom: 0;
+    height: 100%;
+    background: transparent;
+    opacity: 0;
+    width: 320px;
+    transform: translateY(-50px);
+    animation: fadeInDown 1s ease forwards;
+    display: flex;
+    align-items: center;
+    .p {
+        font-size: 40px;
+        color: #4c5bd4;
+        background: transparent;
+        line-height: 1.6;
+        text-transform: capitalize;
+    }
+}
+@keyframes fadeInDown {
+    0% {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
