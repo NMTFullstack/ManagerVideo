@@ -1,0 +1,20 @@
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { StateProps } from "./interfaces";
+
+const initialState: StateProps = {
+  ids: [],
+};
+
+export const UngVienWorkSilce = createSlice({
+  name: "uv-work",
+  initialState,
+  reducers: {
+    setListIdsValue: (state, action: PayloadAction<number[]>) => {
+      state.ids = action.payload;
+    },
+  },
+});
+
+export const { setListIdsValue } = UngVienWorkSilce.actions;
+
+export default UngVienWorkSilce.reducer;
