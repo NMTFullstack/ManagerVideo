@@ -72,7 +72,6 @@ export default function ContentVideoTimViec({
 
     executeTaskAtIndex(0);
   }
-  console.log(listSlices);
   return (
     <>
       <div className={styles.content}>

@@ -40,11 +40,12 @@ export const handleConvertData = async (data: DataTypeResult) => {
     let news_time_ai = JSON.parse(
       data.time_new[data.time_new.length - 1]?.news_time_ai
     );
-    let total = news_time_ai[news_time_ai.length - 1];
-    news_time_ai.pop();
-    let listSlice = await ConvertTimeOneBlog(news_time_ai, data?.news_img);
-    let listTime = await convertTimeMiniSecond(news_time_ai);
-    let totalTime: number = (total[1] + 12 + 8) * 1000;
+    let values: number[] = Object.values(news_time_ai);
+    let keys: any = Object.keys(news_time_ai);
+    let listSlice = keys.map((key: string) => ({ title: key }));
+    let listTime = await convertTimeMiniSecond(values);
+    let totalTime: number = (values[values.length - 1] + 12 + 8) * 1000;
+
     return {
       audio: audio,
       listSlice: listSlice,
