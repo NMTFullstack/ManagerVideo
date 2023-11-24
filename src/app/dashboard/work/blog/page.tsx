@@ -61,7 +61,10 @@ export default function TabsBlogWork() {
                         ) : (
                             <Button
                                 onClick={() => {
-                                    dispatch(setListIdsValue(data.news_id));
+                                    dispatch(setListIdsValue([data.news_id]));
+
+                                    console.log(data.news_id);
+
                                     exportVideo();
                                 }}
                             >
@@ -99,7 +102,6 @@ export default function TabsBlogWork() {
         type: 1,
         page: 1,
     });
-    console.log(dataBlogWork);
     return (
         <div>
             <div>
