@@ -133,7 +133,7 @@ export default function Home() {
                 data-show-faces="true"
             ></div>
             <div className="flex flex-space-between mb-16">
-                {/* <div className="w-160px">
+                <div className="w-160px">
                     <Button
                         type="primary"
                         block
@@ -141,7 +141,7 @@ export default function Home() {
                     >
                         Login Google <CheckOutlined />
                     </Button>
-                </div>{" "} */}
+                </div>{" "}
                 <div className="w-160px">
                     <Button
                         type="primary"

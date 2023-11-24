@@ -52,7 +52,7 @@ export default function RenderVideo() {
     const getData = async (news_id: number) => {
         return await axiosClient.post(API_LIST_BLOG_WORK, {
             type: 1,
-            news_id: news_id,
+            id: news_id,
         });
     };
     useEffect(() => {
