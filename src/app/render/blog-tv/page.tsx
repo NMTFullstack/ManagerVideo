@@ -9,6 +9,9 @@ import { handleConvertData } from "./hooks/convertData";
 import { DataTypeUploadBlog, DataTypeResult } from "./interfaces";
 import { RootState } from "@/common/redux/store";
 import { updateDataBlogTv } from "./services";
+import axios from "axios";
+import axiosClient from "@/common/utils/axios";
+import { API_LIST_BLOG_TV } from "@/common/constants/api.constants";
 
 interface VideoOptions {
     listImg: string[];
@@ -21,7 +24,6 @@ interface VideoOptions {
 export default function RenderVideo() {
     const pathname = usePathname();
     const isVideoPage = pathname.includes("/render/blog-tv");
-
     const [isPlay, setIsPlay] = useState(false);
     const audio = useRef<HTMLAudioElement>(null);
     const audioIntro = useRef<HTMLAudioElement>(null);
@@ -43,10 +45,7 @@ export default function RenderVideo() {
     const { ids } = useSelector((state: RootState) => state.BlogTvSilce);
 
     const [id, setId] = useState(ids[0]);
-    const { dataOneBlogTV, refetchGetDataOneBlogTv } = useGetDataOneBlogTv({
-        news_id: id,
-    });
-    console.log(dataOneBlogTV);
+    const { mutate } = useGetDataOneBlogTv();
     useEffect(() => {
         const unFollow = async () => {
             try {
@@ -64,11 +63,14 @@ export default function RenderVideo() {
                 console.error("Error accessing the screen:", error);
             }
         };
-        if (dataOneBlogTV) {
-            unFollow();
-        }
-    }, [dataOneBlogTV]);
-
+        unFollow();
+    }, []);
+    const getData = async (news_id: number) => {
+        return await axiosClient.post(API_LIST_BLOG_TV, {
+            type: 1,
+            news_id: news_id,
+        });
+    };
     const handleBeforePlay = async (data: DataTypeResult) => {
         const dataConvert = await handleConvertData(data);
         let time = 0;
@@ -84,8 +86,8 @@ export default function RenderVideo() {
         setAudioSrc(dataConvert?.audio);
         return time;
     };
-    const a = document.createElement("a");
-    a.style.display = "none";
+    // const a = document.createElement("a");
+    // a.style.display = "none";
     const recursivelyFetchData = async (
         stream: any,
         mediaRecorder: any,
@@ -93,13 +95,10 @@ export default function RenderVideo() {
     ) => {
         if (index < ids?.length) {
             const currentId: number = ids[index];
-            console.log(dataOneBlogTV);
             let totalTime = 0;
-
+            const dataOneBlogTV = await getData(currentId);
             const data: DataTypeResult = dataOneBlogTV?.data?.data[0];
             totalTime = await handleBeforePlay(data);
-            console.log("start playing");
-            console.log(dataOneBlogTV);
             if (stream?.active) {
                 mediaRecorder.start();
                 setIsPlay(true);
@@ -123,10 +122,10 @@ export default function RenderVideo() {
                     type: "video/webm; codecs=vp9",
                 });
 
-                const url = URL.createObjectURL(recordedBlob);
-                a.href = url;
-                a.download = "recorded-video.webm";
-                a.click();
+                // const url = URL.createObjectURL(recordedBlob);
+                // a.href = url;
+                // a.download = "recorded-video.webm";
+                // a.click();
                 const formData = new FormData();
                 formData.append("title", videoOptions.title);
                 formData.append("file", recordedBlob);
@@ -134,7 +133,17 @@ export default function RenderVideo() {
                 formData.append("id_blog", String(currentId));
                 formData.append("type", "1");
                 formData.append("com_name", "timviec365");
-                // updateDataBlogTv(formData);
+                try {
+                    const fetcher = async () => {
+                        return await axios.post(
+                            "https://api.timviec365.vn/api/qlc/videoai/updateVideo",
+                            formData
+                        );
+                    };
+                    fetcher();
+                } catch (error) {
+                    console.error("Error uploading video:", error);
+                }
             };
             if (totalTime) {
                 setTimeout(() => {
@@ -144,9 +153,9 @@ export default function RenderVideo() {
                     setIsPlay(false);
                 }, totalTime + 500);
 
-                // setTimeout(() => {
-                //     recursivelyFetchData(stream, mediaRecorder, index + 1);
-                // }, totalTime + 3000);
+                setTimeout(() => {
+                    recursivelyFetchData(stream, mediaRecorder, index + 1);
+                }, totalTime + 3000);
             }
         } else {
             if (typeof window !== "undefined") {

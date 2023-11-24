@@ -9,7 +9,7 @@ import {
   unAuthorizedStatusCode,
 } from "../constants/config.constant";
 import { HOST_API } from "@/common/config";
-import { API_REFRESH_TOKEN } from "../constants/api.constants";
+// import { API_REFRESH_TOKEN } from "../constants/api.constants";
 
 import { getCookie } from "./getValueFromCookie";
 import { PATH_AUTH } from "../constants/path.constants";

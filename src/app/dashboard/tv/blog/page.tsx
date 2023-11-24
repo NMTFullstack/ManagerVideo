@@ -62,7 +62,7 @@ export default function BlogTv() {
                         ) : (
                             <Button
                                 onClick={() => {
-                                    dispatch(setListIdsValue(data.news_id));
+                                    dispatch(setListIdsValue([data.news_id]));
                                     exportVideo();
                                 }}
                             >

@@ -9,6 +9,9 @@ import { handleConvertData } from "./hooks/convertData";
 import { DataTypeUploadBlog, DataTypeResult } from "./interfaces";
 import { RootState } from "@/common/redux/store";
 import { updateDataBlogWork } from "./services";
+import axiosClient from "@/common/utils/axios";
+import { API_LIST_BLOG_WORK } from "@/common/constants/api.constants";
+import axios from "axios";
 
 interface VideoOptions {
     listImg: string[];
@@ -42,11 +45,16 @@ export default function RenderVideo() {
     const { ids } = useSelector((state: RootState) => state.BlogWorkSilce);
 
     const [id, setId] = useState(ids[0]);
-    const { dataOneBlogWork, refetchGetDataOneBlogWork } =
-        useGetDataOneBlogWork({
-            id: id,
+    // const { dataOneBlogWork, refetchGetDataOneBlogWork } =
+    //     useGetDataOneBlogWork({
+    //         id: id,
+    //     });
+    const getData = async (news_id: number) => {
+        return await axiosClient.post(API_LIST_BLOG_WORK, {
+            type: 1,
+            news_id: news_id,
         });
-
+    };
     useEffect(() => {
         const unFollow = async () => {
             try {
@@ -65,10 +73,8 @@ export default function RenderVideo() {
                 console.error("Error accessing the screen:", error);
             }
         };
-        if (dataOneBlogWork) {
-            unFollow();
-        }
-    }, [dataOneBlogWork]);
+        unFollow();
+    }, []);
     const handleBeforePlay = async (data: DataTypeResult) => {
         const dataConvert = await handleConvertData(data);
         let time = 0;
@@ -93,16 +99,9 @@ export default function RenderVideo() {
             const currentId: number = ids[index];
             setId(currentId);
             let totalTime = 0;
-            if (index === 0) {
-                const data: DataTypeResult = dataOneBlogWork?.data?.news[0];
-                totalTime = await handleBeforePlay(data);
-            } else {
-                await refetchGetDataOneBlogWork();
-                delay(async () => {
-                    const data: DataTypeResult = dataOneBlogWork?.data?.news[0];
-                    totalTime = await handleBeforePlay(data);
-                }, 2000);
-            }
+            const dataOneBlogWork = await getData(currentId);
+            const data: DataTypeResult = dataOneBlogWork?.data?.news[0];
+            totalTime = await handleBeforePlay(data);
             if (stream.active && totalTime > 0) {
                 console.log("start playing");
                 setIsPlay(true);
@@ -131,8 +130,18 @@ export default function RenderVideo() {
                 formData.append("des", `Mô tả : ${videoOptions.title}`);
                 formData.append("id_blog", String(currentId));
                 formData.append("type", "1");
-                formData.append("com_name", "timviec365");
-                updateDataBlogWork(formData);
+                formData.append("com_name", "work247");
+                try {
+                    const fetcher = async () => {
+                        return await axios.post(
+                            "https://api.timviec365.vn/api/qlc/videoai/updateVideo",
+                            formData
+                        );
+                    };
+                    fetcher();
+                } catch (error) {
+                    console.error("Error uploading video:", error);
+                }
             };
             if (totalTime > 0) {
                 setTimeout(() => {

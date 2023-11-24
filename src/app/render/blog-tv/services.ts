@@ -18,6 +18,6 @@ export const getOneBlogsTv = (data: DataTypeOneBlogTv) => {
         ...data,
     });
 };
-export const updateDataBlogTv = (data: any) => {
-    return axiosClient.post(UPLOAD_DATA, data);
+export const updateDataBlogTv =async (data: any) => {
+    return await axiosClient.post(UPLOAD_DATA, data);
 };
