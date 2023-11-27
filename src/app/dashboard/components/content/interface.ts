@@ -20,3 +20,8 @@ export interface UploadYoutubeType {
   title?:string,
   description?:string
 }
+export interface DeleteDataType {
+  id_blog?:number,
+  type?:number,
+  com_name?:string,
+}

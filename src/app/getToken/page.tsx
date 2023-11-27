@@ -1,7 +1,7 @@
 "use client";
 
-import axios from "axios";
-import { type NextRequest } from "next/server";
+import axiosClient from "@/common/utils/axios";
+
 import { useEffect } from "react";
 
 export default function GetToken(request: any) {
@@ -10,10 +10,11 @@ export default function GetToken(request: any) {
             const searchParams = request?.searchParams?.code;
             if (searchParams) {
                 const fetcher = async () => {
-                    return await axios.post(
-                        "http://localhost:8000/api/qlc/videoai/updateTokenYoutube",
+                    return await axiosClient.post(
+                        "/api/qlc/videoai/updateTokenYoutube",
                         {
-                            token: searchParams,
+                            code: searchParams,
+                            type: 2,
                         }
                     );
                 };

@@ -1,19 +1,14 @@
 "use client";
 
 import React, { useState } from "react";
-import {
-    DesktopOutlined,
-    FileOutlined,
-    PieChartOutlined,
-    TeamOutlined,
-    UserOutlined,
-} from "@ant-design/icons";
+import { FileOutlined, TeamOutlined, UserOutlined } from "@ant-design/icons";
 import type { MenuProps } from "antd";
 import { Breadcrumb, Layout, Menu, theme } from "antd";
 import Link from "next/link";
-
+import { usePathname } from "next/navigation";
+import { ArrowRightOutlined } from "@ant-design/icons";
 const { Header, Content, Footer, Sider } = Layout;
-
+import { PATH_HOME } from "@/common/constants/path.constants";
 type MenuItem = Required<MenuProps>["items"][number];
 
 function getItem(
@@ -34,19 +29,19 @@ const items: MenuItem[] = [
     getItem("TimViec365", "sub1", <UserOutlined />, [
         getItem(
             <div>
-                <Link href="/dashboard/tv/blog">Bài blog</Link>
+                <Link href={PATH_HOME.BLOG_TIM_VIEC}>Bài blog</Link>
             </div>,
             "3"
         ),
         getItem(
             <div>
-                <Link href="/dashboard/tv/td">Tin tuyển dụng</Link>
+                <Link href={PATH_HOME.TD_TIM_VIEC}>Tin tuyển dụng</Link>
             </div>,
             "4"
         ),
         getItem(
             <div>
-                <Link href="/dashboard/tv/uv">Tin ứng viên</Link>
+                <Link href={PATH_HOME.UV_TIM_VIEC}>Tin ứng viên</Link>
             </div>,
             "5"
         ),
@@ -54,19 +49,19 @@ const items: MenuItem[] = [
     getItem("Work247", "sub2", <TeamOutlined />, [
         getItem(
             <div>
-                <Link href="/dashboard/work/blog">Bài blog</Link>
+                <Link href={PATH_HOME.BLOG_WORK247}>Bài blog</Link>
             </div>,
             "6"
         ),
         getItem(
             <div>
-                <Link href="/dashboard/work/td">Tin Tuyển dụng</Link>
+                <Link href={PATH_HOME.TD_WORK247}>Tin Tuyển dụng</Link>
             </div>,
             "8"
         ),
         getItem(
             <div>
-                <Link href="/dashboard/work/uv">Tin Ứng viên</Link>
+                <Link href={PATH_HOME.UV_WORK247}>Tin Ứng viên</Link>
             </div>,
             "9"
         ),
@@ -79,6 +74,7 @@ const LayoutDashboard = ({ children }: { children: React.ReactNode }) => {
     const {
         token: { colorBgContainer },
     } = theme.useToken();
+    const pathname = usePathname();
 
     return (
         <Layout style={{ minHeight: "100vh" }}>
@@ -104,10 +100,13 @@ const LayoutDashboard = ({ children }: { children: React.ReactNode }) => {
                         style={{ margin: "16px 0" }}
                         items={[
                             {
-                                title: "Home",
+                                title: <Link href="/">Home</Link>,
                             },
                             {
-                                title: "An Application",
+                                title: <ArrowRightOutlined />,
+                            },
+                            {
+                                title: pathname,
                             },
                         ]}
                     ></Breadcrumb>

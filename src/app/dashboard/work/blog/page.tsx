@@ -5,6 +5,7 @@ import Link from "next/link";
 import type { ColumnsType } from "antd/es/table";
 import { dispatch } from "@/common/redux/store";
 import { setListIdsValue } from "./blog-work.slice";
+import { PATH_RENDER } from "@/common/constants/path.constants";
 
 interface DataType {
     news_id: string;
@@ -81,11 +82,8 @@ export default function TabsBlogWork() {
         if (typeof window !== "undefined") {
             let windowWidth = 854;
             let windowHeight = 528;
-
-            let windowLeft = (window.screen.width - windowWidth) / 2;
-            let windowTop = (window.screen.height - windowHeight) / 2;
             window.open(
-                "/render/blog-work",
+                PATH_RENDER.BLOG_WORK247,
                 "_blank",
                 "width=" +
                     windowWidth +

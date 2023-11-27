@@ -3,6 +3,7 @@ import { StateProps } from "./interfaces";
 
 const initialState: StateProps = {
   openModalPreview: false,
+  openModalDelete: false,
   openModalYoutube: false,
   openModalFace: false,
   openModalIg: false,
@@ -48,6 +49,9 @@ export const ContentSilce = createSlice({
     setComNameVideo: (state, action: PayloadAction<string>) => {
       state.com_name = action.payload;
     },
+    setOpenModalDelete: (state, action: PayloadAction<boolean>) => {
+      state.openModalDelete = action.payload;
+    },
     resetState: (state, action) => {
       state.id_blog = 0;
       state.openModalPreview = false;
@@ -56,6 +60,7 @@ export const ContentSilce = createSlice({
       state.openModalIg = false;
       state.openModalTiktok = false;
       state.openModalTwitter = false;
+      state.openModalDelete = false;
     },
   },
 });
@@ -72,6 +77,7 @@ export const {
   setOpenModalIg,
   setOpenModalTwitter,
   setOpenModalTiktok,
+  setOpenModalDelete
 } = ContentSilce.actions;
 
 export default ContentSilce.reducer;
