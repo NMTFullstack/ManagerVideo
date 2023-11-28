@@ -6,6 +6,7 @@ import type { ColumnsType } from "antd/es/table";
 import { dispatch } from "@/common/redux/store";
 import { setListIdsValue } from "./blog-work.slice";
 import { PATH_RENDER } from "@/common/constants/path.constants";
+import { useState } from "react";
 
 interface DataType {
     news_id: string;
@@ -98,8 +99,9 @@ export default function TabsBlogWork() {
     };
     const { dataBlogWork } = useGetBlogWorkData({
         type: 1,
-        page: 1,
+        page: 2,
     });
+    const [current, setCurrent] = useState(1);
     return (
         <div>
             <div>
@@ -122,7 +124,7 @@ export default function TabsBlogWork() {
                 </div>
                 <Table
                     columns={columns}
-                    dataSource={dataBlogWork?.data.news.map(
+                    dataSource={dataBlogWork?.data?.news.map(
                         (item: DataType) => ({
                             ...item,
                             key: item.news_id,
@@ -130,11 +132,15 @@ export default function TabsBlogWork() {
                     )}
                     bordered={false}
                     pagination={{
-                        pageSize: 20,
-                        onChange: (e) => {
-                            console.log(e);
+                        pageSize: 10,
+                        current: current,
+                        onChange: (page) => {
+                            console.log(page);
+                            // Gọi hàm khi chuyển trang
+                            // Làm một yêu cầu mới để lấy dữ liệu với trang mới
+                            // Ví dụ: gọi useGetBlogWorkData với page là page
                         },
-                        total: 10,
+                        total: dataBlogWork?.data?.total,
                     }}
                 />
             </div>
