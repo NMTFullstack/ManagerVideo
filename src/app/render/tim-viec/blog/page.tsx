@@ -83,10 +83,11 @@ export default function RenderVideo() {
         return {
             time: time,
             title: data?.tieu_de,
+            des: data?.new_teaser,
         };
     };
-    // const a = document.createElement("a");
-    // a.style.display = "none";
+    const a = document.createElement("a");
+    a.style.display = "none";
     const recursivelyFetchData = async (
         stream: any,
         mediaRecorder: any,
@@ -97,7 +98,7 @@ export default function RenderVideo() {
             let totalTime = 0;
             const dataOneBlogTV = await getData(currentId);
             const data: DataTypeResult = dataOneBlogTV?.data?.data[0];
-            let { time, title } = await handleBeforePlay(data);
+            let { time, title, des } = await handleBeforePlay(data);
             totalTime = time;
             if (stream?.active) {
                 mediaRecorder.start();
@@ -121,29 +122,28 @@ export default function RenderVideo() {
                     type: "video/webm; codecs=vp9",
                 });
 
-                // const url = URL.createObjectURL(recordedBlob);
-                // a.href = url;
-                // a.download = "recorded-video.webm";
-                // a.click();
-                const formData = new FormData();
-                formData.append("title", String(title));
-
-                formData.append("file", recordedBlob);
-                formData.append("des", `Mô tả : ${videoOptions.title}`);
-                formData.append("id_blog", String(currentId));
-                formData.append("type", "1");
-                formData.append("com_name", "timviec365");
-                try {
-                    const fetcher = async () => {
-                        return await axios.post(
-                            "https://api.timviec365.vn/api/qlc/videoai/updateVideo",
-                            formData
-                        );
-                    };
-                    fetcher();
-                } catch (error) {
-                    console.error("Error uploading video:", error);
-                }
+                const url = URL.createObjectURL(recordedBlob);
+                a.href = url;
+                a.download = `work-${currentId}.webm `;
+                a.click();
+                // const formData = new FormData();
+                // formData.append("title", String(title));
+                // formData.append("file", recordedBlob);
+                // formData.append("des", String(des));
+                // formData.append("id_blog", String(currentId));
+                // formData.append("type", "1");
+                // formData.append("com_name", "timviec365");
+                // try {
+                //     const fetcher = async () => {
+                //         return await axios.post(
+                //             "https://api.timviec365.vn/api/qlc/videoai/updateVideo",
+                //             formData
+                //         );
+                //     };
+                //     fetcher();
+                // } catch (error) {
+                //     console.error("Error uploading video:", error);
+                // }
             };
             if (totalTime) {
                 setTimeout(() => {
@@ -155,7 +155,7 @@ export default function RenderVideo() {
 
                 setTimeout(() => {
                     recursivelyFetchData(stream, mediaRecorder, index + 1);
-                }, totalTime + 3000);
+                }, totalTime + 5000);
             }
         } else {
             if (typeof window !== "undefined") {

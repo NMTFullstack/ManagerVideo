@@ -1,6 +1,6 @@
 
 export const PATH_RENDER = {
-  BLOG_TIM_VIEC:"/video-ai/render/tim-viec/blog",
+  BLOG_TIM_VIEC:"/render/tim-viec/blog",
   TD_TIM_VIEC:"/render/tim-viec/tuyen-dung",
   UV_TIM_VIEC:"/render/tim-viec/ung-vien",
   BLOG_WORK247:"/render/work247/blog",

@@ -29,4 +29,5 @@ export interface DataTypeResult {
   news_link?: string;
   tieu_de?: string | undefined;
   time_new?: TimeNewDataType[] | undefined;
+  new_teaser?:string | undefined;
 }

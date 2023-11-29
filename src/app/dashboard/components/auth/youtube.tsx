@@ -14,7 +14,7 @@ export default function YoutubeAuth() {
                 return await axiosClient.post(
                     "/api/qlc/videoai/getTokenYoutube",
                     {
-                        type: 1,
+                        com_name: "timviec365",
                     }
                 );
             };
@@ -29,7 +29,7 @@ export default function YoutubeAuth() {
                 return await axiosClient.post(
                     "/api/qlc/videoai/getTokenYoutube",
                     {
-                        type: 2,
+                        com_name: "work247",
                     }
                 );
             };

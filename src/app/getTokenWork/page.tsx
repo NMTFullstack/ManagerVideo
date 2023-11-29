@@ -14,7 +14,7 @@ export default function GetTokenWork(request: any) {
                         "/api/qlc/videoai/updateTokenYoutube",
                         {
                             code: searchParams,
-                            type: 1,
+                            com_name: "work247",
                         }
                     );
                 };

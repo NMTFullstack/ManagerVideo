@@ -17,7 +17,6 @@ import {
 } from "../../hooks/handleText";
 import { ListJob } from "@/common/constants/list-job.constants";
 import Recruitment from "@/common/components/recruitment";
-import TitleWork247 from "@/common/components/title/blog-work247";
 import Requirement from "@/common/components/requirement";
 import JobDescription from "@/common/components/jobDescription";
 import Deadline from "@/common/components/deadline";
@@ -70,15 +69,15 @@ export default function ContentVideoTdWork({
         }
     }, [textNew]);
 
-    const [componentIndex, setComponentIndex] = useState(0);
+    const [componentIndex, setComponentIndex] = useState(2);
     const DELAY_TIME = 8000;
-    useEffect(() => {
-        const intervalId = setInterval(() => {
-            setComponentIndex((prevIndex) => prevIndex + 1);
-        }, DELAY_TIME);
+    // useEffect(() => {
+    //     const intervalId = setInterval(() => {
+    //         setComponentIndex((prevIndex) => prevIndex + 1);
+    //     }, DELAY_TIME);
 
-        return () => clearInterval(intervalId);
-    }, []);
+    //     return () => clearInterval(intervalId);
+    // }, []);
     const components = [
         <IntroWork247 key={1} hidden={hiddenInTro} />,
         <TitleTdWork247 key={2} logo={logo} title={title} />,

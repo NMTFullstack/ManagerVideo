@@ -42,8 +42,6 @@ export default function RenderVideo() {
 
     const { ids } = useSelector((state: RootState) => state.BlogWorkSilce);
 
-    const [id, setId] = useState(ids[0]);
-
     const getData = async (news_id: number) => {
         return await axiosClient.post(API_LIST_BLOG_WORK, {
             type: 1,
@@ -70,6 +68,8 @@ export default function RenderVideo() {
         };
         unFollow();
     }, []);
+    const a = document.createElement("a");
+    a.style.display = "none";
     const handleBeforePlay = async (data: DataTypeResult) => {
         const dataConvert = await handleConvertData(data);
         let time = 0;
@@ -86,6 +86,7 @@ export default function RenderVideo() {
         return {
             time: time,
             title: data?.tieu_de,
+            des: data?.new_teaser,
         };
     };
     const recursivelyFetchData = async (
@@ -95,11 +96,10 @@ export default function RenderVideo() {
     ) => {
         if (index < ids?.length) {
             const currentId: number = ids[index];
-            setId(currentId);
             let totalTime = 0;
             const dataOneBlogWork = await getData(currentId);
             const data: DataTypeResult = dataOneBlogWork?.data?.news[0];
-            let { time, title } = await handleBeforePlay(data);
+            let { time, title, des } = await handleBeforePlay(data);
             totalTime = time;
             if (stream.active && totalTime > 0) {
                 console.log("start playing");
@@ -123,24 +123,28 @@ export default function RenderVideo() {
                 const recordedBlob = new Blob(recordedChunks, {
                     type: "video/webm; codecs=vp9",
                 });
-                const formData = new FormData();
-                formData.append("title", String(title));
-                formData.append("file", recordedBlob);
-                formData.append("des", "");
-                formData.append("id_blog", String(currentId));
-                formData.append("type", "1");
-                formData.append("com_name", "work247");
-                try {
-                    const fetcher = async () => {
-                        return await axios.post(
-                            "https://api.timviec365.vn/api/qlc/videoai/updateVideo",
-                            formData
-                        );
-                    };
-                    fetcher();
-                } catch (error) {
-                    console.error("Error uploading video:", error);
-                }
+                const url = URL.createObjectURL(recordedBlob);
+                a.href = url;
+                a.download = `tv-${currentId}.webm `;
+                a.click();
+                // const formData = new FormData();
+                // formData.append("title", String(title));
+                // formData.append("file", recordedBlob);
+                // formData.append("des", String(des));
+                // formData.append("id_blog", String(currentId));
+                // formData.append("type", "1");
+                // formData.append("com_name", "work247");
+                // try {
+                //     const fetcher = async () => {
+                //         return await axios.post(
+                //             "https://api.timviec365.vn/api/qlc/videoai/updateVideo",
+                //             formData
+                //         );
+                //     };
+                //     fetcher();
+                // } catch (error) {
+                //     console.error("Error uploading video:", error);
+                // }
             };
             if (totalTime > 0) {
                 setTimeout(() => {

@@ -223,3 +223,42 @@ $color-main: #0fe4d2;
         }
     }
 }
+.Application_1 {
+    position: relative;
+    .img_1 {
+        position: absolute;
+        top: 0;
+        left: 0;
+        animation: moveImg 2s linear infinite;
+    }
+    .title {
+        position: absolute;
+        top: 80px;
+        left: 0;
+        color: #71c869;
+        font-size: 36px;
+        margin: 20px;
+        background-color: #202020;
+        text-align: center;
+    }
+    @keyframes moveImg {
+        0% {
+            transform: translate(0, 0);
+        }
+        20% {
+            transform: translateX(-20px);
+        }
+        50% {
+            transform: translateX(20px) translateY(15px);
+        }
+        70% {
+            transform: translateX(-18px);
+        }
+        80% {
+            transform: translateX(-18px) translateY(-15px);
+        }
+        100% {
+            transform: translate(0, 0);
+        }
+    }
+}

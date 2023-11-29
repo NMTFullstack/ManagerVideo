@@ -132,25 +132,25 @@ export default function RenderVideo() {
                 const recordedBlob = new Blob(recordedChunks, {
                     type: "video/webm; codecs=vp9",
                 });
-                const formData = new FormData();
-                formData.append("title", String(title));
-                formData.append("file", recordedBlob);
-                formData.append("des", `Mô tả : ${videoOptions.title}`);
-                formData.append("id_blog", String(currentId));
-                formData.append("type", "2");
-                formData.append("com_name", "work247");
-                try {
-                    const fetcher = async () => {
-                        return await axios.post(
-                            // "https://api.timviec365.vn/api/qlc/videoai/updateVideo",
-                            "http://localhost:8000/api/qlc/videoai/updateVideo",
-                            formData
-                        );
-                    };
-                    fetcher();
-                } catch (error) {
-                    console.error("Error uploading video:", error);
-                }
+                // const formData = new FormData();
+                // formData.append("title", String(title));
+                // formData.append("file", recordedBlob);
+                // formData.append("des", `Mô tả : ${videoOptions.title}`);
+                // formData.append("id_blog", String(currentId));
+                // formData.append("type", "2");
+                // formData.append("com_name", "work247");
+                // try {
+                //     const fetcher = async () => {
+                //         return await axios.post(
+                //             // "https://api.timviec365.vn/api/qlc/videoai/updateVideo",
+                //             "http://localhost:8000/api/qlc/videoai/updateVideo",
+                //             formData
+                //         );
+                //     };
+                //     fetcher();
+                // } catch (error) {
+                //     console.error("Error uploading video:", error);
+                // }
             };
             if (totalTime) {
                 setTimeout(() => {
@@ -161,7 +161,7 @@ export default function RenderVideo() {
                 }, totalTime + 500);
 
                 setTimeout(() => {
-                    recursivelyFetchData(stream, mediaRecorder, index + 1);
+                    // recursivelyFetchData(stream, mediaRecorder, index + 1);
                 }, totalTime + 3000);
             }
         } else {

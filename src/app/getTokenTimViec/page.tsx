@@ -4,7 +4,7 @@ import axiosClient from "@/common/utils/axios";
 
 import { useEffect } from "react";
 
-export default function GetToken(request: any) {
+export default function GetTokenTV(request: any) {
     useEffect(() => {
         const unFollow = async () => {
             const searchParams = request?.searchParams?.code;
@@ -14,7 +14,7 @@ export default function GetToken(request: any) {
                         "/api/qlc/videoai/updateTokenYoutube",
                         {
                             code: searchParams,
-                            type: 2,
+                            com_name: "timviec365",
                         }
                     );
                 };

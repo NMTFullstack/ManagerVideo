@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import styles from "./title.module.scss";
-import { Image } from "antd";
+import { Image, Typography } from "antd";
 export default function TitleTdWork247({
     title,
     logo,
@@ -17,6 +17,8 @@ export default function TitleTdWork247({
     }, []);
 
     let img = "/img/CV/it/2.jpeg";
+    let date = new Date();
+    let mounth = date.getMonth() + 1;
     return (
         <div className={styles.title_1}>
             <div className={styles.content}>
@@ -31,6 +33,13 @@ export default function TitleTdWork247({
                 </div>
 
                 <div className="mt-36 text-align-center ">
+                    {titleState ? (
+                        <p className={styles.title}>
+                            Tin tuyển dụng tháng {mounth}
+                        </p>
+                    ) : (
+                        <></>
+                    )}
                     {titleState ? <p className={styles.p}>{title}</p> : <></>}
                 </div>
             </div>
