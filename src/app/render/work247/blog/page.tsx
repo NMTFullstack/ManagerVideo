@@ -123,28 +123,29 @@ export default function RenderVideo() {
                 const recordedBlob = new Blob(recordedChunks, {
                     type: "video/webm; codecs=vp9",
                 });
-                const url = URL.createObjectURL(recordedBlob);
-                a.href = url;
-                a.download = `tv-${currentId}.webm `;
-                a.click();
-                // const formData = new FormData();
-                // formData.append("title", String(title));
-                // formData.append("file", recordedBlob);
-                // formData.append("des", String(des));
-                // formData.append("id_blog", String(currentId));
-                // formData.append("type", "1");
-                // formData.append("com_name", "work247");
-                // try {
-                //     const fetcher = async () => {
-                //         return await axios.post(
-                //             "https://api.timviec365.vn/api/qlc/videoai/updateVideo",
-                //             formData
-                //         );
-                //     };
-                //     fetcher();
-                // } catch (error) {
-                //     console.error("Error uploading video:", error);
-                // }
+                // const url = URL.createObjectURL(recordedBlob);
+                // a.href = url;
+                // a.download = `tv-${currentId}.webm `;
+                // a.click();
+                const formData = new FormData();
+                formData.append("title", String(title));
+                formData.append("file", recordedBlob);
+                formData.append("des", String(des));
+                formData.append("id_blog", String(currentId));
+                formData.append("type", "1");
+                formData.append("com_name", "work247");
+                try {
+                    const fetcher = async () => {
+                        return await axios.post(
+                            // "https://api.timviec365.vn/api/qlc/videoai/updateVideo",
+                            "http://localhost:8000/api/qlc/videoai/updateVideo",
+                            formData
+                        );
+                    };
+                    fetcher();
+                } catch (error) {
+                    console.error("Error uploading video:", error);
+                }
             };
             if (totalTime > 0) {
                 setTimeout(() => {

@@ -27,6 +27,7 @@ export interface DataTypeResult {
   news_audio?: string[] | undefined;
   news_img?: string[];
   news_link?: string;
+  com_logo?: string;
   tieu_de?: string | undefined;
   time_new?: TimeNewDataType[] | undefined;
 }

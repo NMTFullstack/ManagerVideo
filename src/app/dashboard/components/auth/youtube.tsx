@@ -62,15 +62,21 @@ export default function YoutubeAuth() {
             <div className="my-20">
                 <h3>Youtube</h3>
             </div>
-            <div className="my-20 w-140px">
-                <Button size="large" block onClick={() => login(getTokenTV)}>
-                    Timviec
-                </Button>
-            </div>
-            <div className="my-20 w-140px" onClick={() => login(getTokenWork)}>
-                <Button size="large" block>
-                    Work
-                </Button>
+            <div className=" flex gap-24">
+                <div className=" w-140px">
+                    <Button
+                        size="large"
+                        block
+                        onClick={() => login(getTokenTV)}
+                    >
+                        Timviec
+                    </Button>
+                </div>
+                <div className=" w-140px" onClick={() => login(getTokenWork)}>
+                    <Button size="large" block>
+                        Work
+                    </Button>
+                </div>
             </div>
         </div>
     );

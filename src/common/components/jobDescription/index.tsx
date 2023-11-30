@@ -1,60 +1,38 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Image } from "antd";
-export default function JobDescription({ title }: { title: string | null }) {
-    const [titleState, setTitleState] = useState(false);
-
-    useEffect(() => {
-        setTimeout(() => {
-            setTitleState(true);
-        }, 1700);
-    }, []);
-
+export default function JobDescription_1({ title }: { title: string | null }) {
     let img = "/img/CV/it/2.jpeg";
-    useEffect(() => {
-        document
-            .querySelectorAll(".has_animation")
-            .forEach((element, index) => {
-                const delay: any = element.getAttribute("data-delay");
-                setTimeout(() => {
-                    element.classList.add("animate-in");
-                }, delay);
-            });
-    }, []);
-    return (
-        <>
-            {/* <div className="animation1">
-                <Image
-                    className="img"
-                    src={img}
-                    width={360}
-                    height={640}
-                    preview={false}
-                />
 
-                <div className="title">
-                    {titleState ? <p className="p">{title}</p> : <></>}
-                </div>
-            </div> */}
-            {/* Luong  */}
-            {/* <div className="animation2">
-                <div className="has_animation animation_ltr" data-delay="1000">
-                    <p className={styles.bigger}>{title}</p>
-                </div>
-                <div className="has_animation animation_rtl" data-delay="2000">
-                    <Image src={img} width={360} height={360} preview={false} />
-                </div>
-            </div> */}
-            {/* <div className="animation3">
-                <div className="ani_3_img mt-40 mb-30">
-                    <Image src={img} width={360} height={360} preview={false} />
-                </div>
-                <div className="ani_3_title">
-                    <span> {title}</span>
-                    <span> {title}:</span>
-                    <span> {title}</span>
-                </div>
-            </div> */}
-        </>
+    const spanizeRef: any = useRef(null);
+
+    useEffect(() => {
+        const spanizeLetters = {
+            init: function () {
+                console.log("run");
+                this.bindEvents();
+            },
+            bindEvents: function () {
+                const letters = spanizeRef.current.textContent
+                    .trim()
+                    .replace(/\./g, "")
+                    .split("");
+                spanizeRef.current.innerHTML =
+                    "<span >" + letters.join("</span><span>") + "</span>";
+            },
+        };
+
+        if (title) {
+            spanizeLetters.init();
+        }
+    }, [title]);
+    return (
+        <div className="job-description_1">
+            <div className=" mast">
+                <p className="mast__text js-spanize" ref={spanizeRef}>
+                    {title}
+                </p>
+            </div>
+        </div>
     );
 }

@@ -20,6 +20,7 @@ export default function Requirement({ title }: { title: string | null }) {
                 }, delay);
             });
     }, []);
+    console.log(title);
     return (
         <>
             {/* <div className="animation1">

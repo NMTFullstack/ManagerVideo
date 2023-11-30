@@ -1,8 +1,19 @@
 "use client";
 import { useEffect, useState } from "react";
 import { Image } from "antd";
-export default function Benefits({ title }: { title: string | null }) {
-    let img = "/img/CV/it/2.jpeg";
+export default function Benefits_1({ title }: { title: string | null }) {
+    let img = [
+        "/img/1.jpg",
+        "/img/2.jpg",
+        "/img/3.jpg",
+        "/img/4.jpg",
+        "/img/5.jpg",
+        "/img/6.jpg",
+        "/img/7.jpg",
+        "/img/8.jpg",
+        "/img/9.jpg",
+        "/img/10.jpg",
+    ];
     useEffect(() => {
         document
             .querySelectorAll(".has_animation")
@@ -16,38 +27,22 @@ export default function Benefits({ title }: { title: string | null }) {
 
     return (
         <>
-            {/* <div className="animation1">
-                <Image
-                    className="img"
-                    src={img}
-                    width={360}
-                    height={640}
-                    preview={false}
-                />
-
-                <div className="title">
-                    {titleState ? <p className="p">{title}</p> : <></>}
-                </div>
-            </div> */}
-            {/* Luong  */}
             <div className="animation2">
-                <div className="has_animation animation_ltr" data-delay="1000">
+                <div
+                    className="has_animation animation_ltr flex flex-center flex-align-center"
+                    data-delay="1000"
+                >
                     <p className="bigger">{title}</p>
                 </div>
-                {/* <div className="has_animation animation_rtl" data-delay="2000">
-                    <Image src={img} width={360} height={360} preview={false} />
-                </div> */}
+                <div className="has_animation animation_rtl" data-delay="2000">
+                    <Image
+                        src={img[Math.floor(Math.random() * 10) + 1]}
+                        width={360}
+                        height={360}
+                        preview={false}
+                    />
+                </div>
             </div>
-            {/* <div className="animation3">
-                <div className="ani_3_img mt-40 mb-30">
-                    <Image src={img} width={360} height={360} preview={false} />
-                </div>
-                <div className="ani_3_title">
-                    <span> {title}</span>
-                    <span> {title}:</span>
-                    <span> {title}</span>
-                </div>
-            </div> */}
         </>
     );
 }

@@ -78,6 +78,10 @@ $color-main: #0fe4d2;
         color: #202020;
         display: inline-block;
         text-align: center;
+        height: 200px;
+        text-overflow: ellipsis;
+        // white-space: nowrap;
+        overflow: hidden;
     }
 
     // ANIMATION
@@ -229,7 +233,7 @@ $color-main: #0fe4d2;
         position: absolute;
         top: 0;
         left: 0;
-        animation: moveImg 2s linear infinite;
+        animation: moveImg 2s ease-in-out infinite;
     }
     .title {
         position: absolute;
@@ -238,7 +242,6 @@ $color-main: #0fe4d2;
         color: #71c869;
         font-size: 36px;
         margin: 20px;
-        background-color: #202020;
         text-align: center;
     }
     @keyframes moveImg {
@@ -259,6 +262,57 @@ $color-main: #0fe4d2;
         }
         100% {
             transform: translate(0, 0);
+        }
+    }
+}
+$font-mono: "Cutive Mono", monospace;
+
+.job-description_1 {
+    $font-mono: "Cutive Mono", monospace;
+    $ease-cb: cubic-bezier(0.19, 1, 0.22, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    @mixin nth-ani-delay($delay_items: 7, $delay_time: 0.2s) {
+        @for $i from 1 through $delay_items {
+            &:nth-child(#{$i}) {
+                animation-delay: $delay_time * $i;
+            }
+        }
+    }
+
+    .mast {
+        &__text {
+            font-family: $font-mono;
+            font-size: 1em;
+            margin: 0 0 0.5em;
+            line-height: 1.5;
+            white-space: pre;
+            padding: 0 10px;
+        }
+
+        &__text span {
+            animation: letter-glow 0.7s 0s ease both;
+            @include nth-ani-delay(180, 0.05s);
+        }
+    }
+
+    @keyframes letter-glow {
+        0% {
+            opacity: 0;
+            text-shadow: 0px 0px 1px rgba(255, 255, 255, 0.1);
+        }
+        66% {
+            opacity: 1;
+            text-shadow: 0px 0px 20px rgba(255, 255, 255, 0.9);
+        }
+        77% {
+            opacity: 1;
+        }
+        100% {
+            opacity: 0.7;
+            text-shadow: 0px 0px 20px rgba(255, 255, 255, 0);
         }
     }
 }

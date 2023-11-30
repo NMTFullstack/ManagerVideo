@@ -27,7 +27,10 @@ export default function TitleTdWork247({
                         {logo ? (
                             <Image src={logo} preview={false} />
                         ) : (
-                            <Image src={logo} preview={false} />
+                            <Image
+                                src="/video/img/logo_work.png"
+                                preview={false}
+                            />
                         )}
                     </a>
                 </div>

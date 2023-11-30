@@ -7,18 +7,18 @@ import YoutubeAuth from "./youtube";
 import FacebookAuth from "./facebook/facebook";
 export default function ListAuth() {
     return (
-        <div className="flex flex-space-between mb-16 gap-24">
+        <div
+            className="flex  mb-16 gap-24"
+            style={{
+                justifyContent: "center",
+            }}
+        >
             <div className="w-160px">
                 <YoutubeAuth />
             </div>{" "}
-            <div className="w-160px">
+            <div className="w-160px ml-24">
                 <FacebookAuth />
             </div>{" "}
-            <div className="w-160px">
-                <Button type="primary" block>
-                    Login Tiktok <CheckOutlined />
-                </Button>
-            </div>
         </div>
     );
 }
