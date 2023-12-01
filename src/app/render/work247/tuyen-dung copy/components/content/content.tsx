@@ -25,37 +25,32 @@ import Benefits_1 from "@/common/components/benefits";
 import Application_2 from "@/common/components/application/Application_2";
 import Application_1 from "@/common/components/application/Application_1";
 import OutTroTikTok from "@/common/components/outtro/outtro-td";
-import BgTamThoi from "@/app/render/tim-viec/tuyen-dung/components/tam-thoi";
 export default function ContentVideoTdWork({
   title,
   textNew,
   logo,
-  time,
 }: {
   title?: string;
   textNew?: string;
   logo?: string;
-  time?: any;
 }) {
   const [hiddenInTro, setHiddenInTro] = useState(true);
-  const [hiddenOutTro, setHiddenOutTro] = useState(false);
+  // const [hiddenOutTro, setHiddenOutTro] = useState(false);
   // const [hiddenTitle, setHiddenTitle] = useState(false);
-  const [step2, setStep2] = useState(false);
+  // const [step2, setStep2] = useState(false);
   // const [sliderState, setSliderState] = useState<boolean[]>([]);
-  useEffect(() => {
-    setTimeout(() => {
-      setHiddenInTro(false);
-      setStep2(true);
-
-      // setHiddenTitle(true);
-    }, 8000);
-  }, []);
-  useEffect(() => {
-    setTimeout(() => {
-      setHiddenOutTro(true);
-      setStep2(false);
-    }, time - 7000);
-  }, []);
+  // useEffect(() => {
+  //     setTimeout(() => {
+  //         setHiddenInTro(false);
+  //         setHiddenTitle(true);
+  //     }, 8000);
+  // }, []);
+  // useEffect(() => {
+  //     setTimeout(() => {
+  //         setHiddenOutTro(true);
+  //         setStep2(false);
+  //     }, 60000 - 7000);
+  // }, []);
 
   const [deadline, setDeadline] = useState<string | null>("");
   const [jobDescription, setJobDescription] = useState<string | null>("");
@@ -113,12 +108,7 @@ export default function ContentVideoTdWork({
 
   return (
     <>
-      {/* <div className={styles.content}>{renderedComponent}</div> */}
-      <div className={styles.content}>
-        {hiddenInTro && <IntroWork247 key={1} hidden={hiddenInTro} />}
-        {step2 && <BgTamThoi key={8} />}
-        {hiddenOutTro && <OutTroTikTok key={9} hidden={true} />}
-      </div>
+      <div className={styles.content}>{renderedComponent}</div>
     </>
   );
 }
