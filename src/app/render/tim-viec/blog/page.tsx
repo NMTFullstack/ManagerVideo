@@ -136,8 +136,8 @@ export default function RenderVideo() {
                 try {
                     const fetcher = async () => {
                         return await axios.post(
-                            // "https://api.timviec365.vn/api/qlc/videoai/updateVideo",
-                            "http://localhost:8000/api/qlc/videoai/updateVideo",
+                            "https://api.timviec365.vn/api/qlc/videoai/updateVideo",
+                            // "http://localhost:8000/api/qlc/videoai/updateVideo",
                             formData
                         );
                     };
